@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-todos',
   templateUrl: './todos.page.html',
   styleUrls: ['./todos.page.scss'],
 })
-export class TodosPage implements OnInit {
+export class TodosPage {
+  private todo : FormGroup;
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) {
+    this.todo = this.formBuilder.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      completed: ['']
+    });
+  }
 
-  ngOnInit() {
+  addTask(){
+    console.log(this.todo.value);
   }
 
 }

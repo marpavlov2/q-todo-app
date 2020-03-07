@@ -9,5 +9,24 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="ion-padding">
+  <form [formGroup]="todo" (ngSubmit)="addTask()">
+    <ion-item class="ion-no-padding">
+      <ion-label position="floating" color="primary">Title</ion-label>
+      <ion-input required  type="text" formControlName="title"></ion-input>
+    </ion-item>
+
+    <ion-item class="ion-no-padding">
+      <ion-label position="floating">Description</ion-label>
+      <ion-textarea required formControlName="description"></ion-textarea>
+    </ion-item>
+
+    <ion-item class="ion-no-padding">
+      <ion-checkbox checked="false" formControlName="completed" color="secondary" slot="end"></ion-checkbox>
+      <ion-label>Completed</ion-label>
+    </ion-item>
+
+    <ion-button class="ion-margin-top" color="light" expand="full" type="submit" [disabled]="!todo.valid">
+      Add task</ion-button>
+  </form>
 </ion-content>
