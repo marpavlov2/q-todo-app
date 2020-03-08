@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Task } from '../interfaces/task';
 import { MasterDataService } from '../services/master-data.service';
@@ -8,11 +8,15 @@ import { MasterDataService } from '../services/master-data.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit{
   displayedColumns: string[] = ['Title', 'Description', 'Completed', 'Created'];
   todos: Task[] = [...this.md.todos];
 
   constructor(private router: Router, private md: MasterDataService) { }
+
+  ngOnInit(): void {
+    this.todos = this.md.todos;
+  }
 
   completeFilter(complete: boolean) {
     if (complete === true) {

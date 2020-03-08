@@ -4,12 +4,11 @@
       All Tasks
     </ion-title>
   </ion-toolbar>
-  <ion-toolbar>
-      <ion-searchbar showCancelButton="focus"></ion-searchbar>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
+  <ion-searchbar showCancelButton="focus"></ion-searchbar>
+
   <ion-list>
     <ion-radio-group value="none">
       <ion-list-header class="ion-no-padding">
@@ -30,7 +29,7 @@
     </ion-radio-group>
   </ion-list>
 
-  <table>
+  <table class="ion-margin-top">
     <tr>
       <th *ngFor="let column of displayedColumns">{{column}}</th>
     </tr>
