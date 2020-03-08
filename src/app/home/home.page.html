@@ -33,13 +33,25 @@
     <tr>
       <th *ngFor="let column of displayedColumns">{{column}}</th>
     </tr>
-    <tr *ngFor="let todo of filteredTasks | searchTask:searchTerm" (click)="gotoEditTask(filteredTasks.id)">
-      <td>{{todo.title}}</td>
-      <td>{{todo.description}}</td>
-      <td class="ion-text-center">
-        <ion-checkbox color="secondary" [checked]="todo.completed"></ion-checkbox>
+    <tr *ngFor="let task of filteredTasks | searchTask:searchTerm; let i = index"
+      [ngStyle]="{'background-color': task.isSelected ? '#f2f2f2' : '#ffffff'}">
+      <td class="ion-text-center multiple-select">
+        <ion-checkbox color="secondary" [checked]="task.completed" (click)="selectItem(i, task)"></ion-checkbox>
       </td>
-      <td>{{todo.created}}</td>
+      <td>{{task.title}}</td>
+      <td>{{task.description}}</td>
+      <td class="ion-text-center">
+        <ion-checkbox color="secondary" [checked]="task.completed"></ion-checkbox>
+      </td>
+      <td>{{task.created}}</td>
+      <td class="ion-text-center">
+        <ion-button color="secondary" size="small" (click)="gotoEditTask(task.id)">
+          <ion-icon slot="icon-only" name="create"></ion-icon>
+        </ion-button>
+        <ion-button color="danger" size="small" (click)="deleteTask(task)">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-button>
+      </td>
     </tr>
   </table>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="gotoAddTask()">
