@@ -32,7 +32,7 @@ export class TodosPage implements OnInit, OnDestroy {
   }
 
   addTask(){
-    this.md.todos.push(this.todoForm.value);
+    this.md.tasks.push(this.todoForm.value);
     this.location.back();
   }
 

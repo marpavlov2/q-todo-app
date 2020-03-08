@@ -5,10 +5,10 @@ import { Task } from '../interfaces/task';
   providedIn: 'root'
 })
 export class MasterDataService {
-  public todos: Task[] = [
+  public tasks: Task[] = [
     { id: 1, title: "Task 1", description: "Add a create new button", completed: true, created: "1995-12-17T03:24:00" },
     { id: 2, title: "Task 2", description: "Add sort by fields", completed: true, created: "1996-12-17T03:24:00" },
-    { id: 3, title: "Task 3", description: "Add a search field to filter TODOs by title and description", completed: false, created: "1997-12-17T03:24:00" },
+    { id: 3, title: "Task 3", description: "Add a search field to filter TODOs by title and description", completed: true, created: "1997-12-17T03:24:00" },
     { id: 4, title: "Task 4", description: "Add group actions: DELETE", completed: false, created: "1998-12-17T03:24:00" },
     { id: 5, title: "Task 5", description: "Add pagination", completed: false, created: "1999-12-17T03:24:00" },
     { id: 6, title: "Task 6", description: "Add view task", completed: false, created: "1999-12-17T03:24:00" },

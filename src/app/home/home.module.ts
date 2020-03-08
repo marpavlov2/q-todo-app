@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SearchTaskPipe } from '../pipes/search-task-filter.pipe';
 
 @NgModule({
   imports: [
@@ -20,6 +21,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     ]),
     ReactiveFormsModule
   ],
-  declarations: [HomePage]
+  declarations: [HomePage, SearchTaskPipe]
 })
 export class HomePageModule {}
