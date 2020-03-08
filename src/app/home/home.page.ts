@@ -4,6 +4,8 @@ import { Task } from '../interfaces/task';
 import { MasterDataService } from '../services/master-data.service';
 import { AlertController } from '@ionic/angular';
 
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -12,16 +14,19 @@ import { AlertController } from '@ionic/angular';
 export class HomePage implements OnInit {
   searchTerm: string | undefined;
   displayedColumns: string[] = ['', 'Title', 'Description', 'Completed', 'Created'];
-  filteredTasks: Task[] = [];
 
   get hasSelection() {
-    return this.filteredTasks.some(task => task.isSelected === true);
+    if (this.md.filteredTasks) {
+      return this.md.filteredTasks.some(task => task.isSelected === true);
+    }
   }
 
   constructor(private router: Router, private md: MasterDataService,
-    public alertController: AlertController) { }
+    public alertController: AlertController) {
+  }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.md.tasks = await this.md.getTasks();
     this.completeFilter();
   }
 
@@ -48,7 +53,7 @@ export class HomePage implements OnInit {
   }
 
   deleteTasks() {
-    
+
   }
 
   gotoAddTask() {
@@ -59,19 +64,23 @@ export class HomePage implements OnInit {
     this.router.navigate([`/todos/${id}/edit`]);
   }
 
-  completeFilter(complete?: boolean) {
+  async completeFilter(complete?: boolean) {
     if (complete === true) {
-      this.filteredTasks = this.md.tasks.filter(todo => todo.completed == true);
+      this.md.filteredTasks = this.md.tasks.filter(todo => todo.completed == true);
     } else if (complete === false) {
-      this.filteredTasks = this.md.tasks.filter(todo => todo.completed == false);
+      this.md.filteredTasks = this.md.tasks.filter(todo => todo.completed == false);
     } else {
-      this.filteredTasks = this.md.tasks;
+      this.md.filteredTasks = this.md.tasks;
     };
   }
 
   selectItem(index: number, task: Task) {
     task.isSelected = task.isSelected ? false : true;
-    this.filteredTasks[index] = task;
+    this.md.filteredTasks[index] = task;
+  }
+
+  formatDate(date: Date): string {
+    return moment(date).format('DD.MM.YYYY, hh:mm:ss')
   }
 
 }

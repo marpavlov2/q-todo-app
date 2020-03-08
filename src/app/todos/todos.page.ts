@@ -26,22 +26,22 @@ export class TodosPage implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.routeSub = this.route.params.subscribe(params => {
+    this.routeSub = this.route.params.subscribe(async params => {
       this.isEditing = params['edit'];
       let taskId = +params['id'];
-      let task = this.md.tasks.find(task => task.id === taskId);
+      let task = await this.md.tasks.find(task => task.id === taskId);
       if (task) {
-        this.getTask(task);
+        this.restoreTask(task);
       }
     });
   }
 
   addTask() {
-    this.md.tasks.push(this.taskForm.value);
+    this.md.createTask(this.taskForm.value);
     this.location.back();
   }
 
-  getTask(task: Task) {
+  restoreTask(task: Task) {
     this.taskForm.patchValue({
       title: task.title,
       description: task.description

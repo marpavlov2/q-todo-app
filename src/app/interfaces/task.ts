@@ -1,8 +1,10 @@
+import { Timestamp } from 'rxjs';
+
 export interface Task {
     id: string | number,
     title: string,
     description: string,
     completed: boolean,
-    created: string,
+    created: Date,
     isSelected?: boolean
 }
