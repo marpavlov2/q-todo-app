@@ -34,7 +34,7 @@
     <tr>
       <th *ngFor="let column of displayedColumns">{{column}}</th>
     </tr>
-    <tr *ngFor="let todo of todosCopy">
+    <tr *ngFor="let todo of todos" (click)="gotoEditTask(todo.id)">
       <td>{{todo.title}}</td>
       <td>{{todo.description}}</td>
       <td class="ion-text-center">
@@ -43,7 +43,7 @@
       <td>{{todo.created}}</td>
     </tr>
   </table>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="gotoAddTodo()">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="gotoAddTask()">
     <ion-fab-button color="secondary">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
