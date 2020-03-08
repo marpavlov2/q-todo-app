@@ -11,9 +11,12 @@ import { AlertController } from '@ionic/angular';
 })
 export class HomePage implements OnInit {
   searchTerm: string | undefined;
-  selection: boolean = false;
   displayedColumns: string[] = ['', 'Title', 'Description', 'Completed', 'Created'];
   filteredTasks: Task[] = [];
+
+  get hasSelection() {
+    return this.filteredTasks.some(task => task.isSelected === true);
+  }
 
   constructor(private router: Router, private md: MasterDataService,
     public alertController: AlertController) { }
@@ -44,6 +47,10 @@ export class HomePage implements OnInit {
     await alert.present();
   }
 
+  deleteTasks() {
+    
+  }
+
   gotoAddTask() {
     this.router.navigate(['/todos']);
   }
@@ -63,7 +70,6 @@ export class HomePage implements OnInit {
   }
 
   selectItem(index: number, task: Task) {
-    this.selection = true;
     task.isSelected = task.isSelected ? false : true;
     this.filteredTasks[index] = task;
   }
