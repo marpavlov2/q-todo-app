@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import * as firebase from 'firebase';
+import { ToastService } from './services/toast.service';
 
 firebase.initializeApp({
   apiKey: "AIzaSyBOv4hOeiB51_B9D7VcbNciBH_n9NdxS1c",
@@ -29,7 +30,8 @@ firebase.initializeApp({
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    ToastService
   ],
   bootstrap: [AppComponent]
 })

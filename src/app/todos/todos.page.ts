@@ -28,7 +28,7 @@ export class TodosPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.routeSub = this.route.params.subscribe(async params => {
       this.isEditing = params['edit'];
-      let taskId = +params['id'];
+      let taskId = params['id'];
       let task = await this.md.tasks.find(task => task.id === taskId);
       if (task) {
         this.restoreTask(task);

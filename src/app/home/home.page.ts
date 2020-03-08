@@ -38,12 +38,11 @@ export class HomePage implements OnInit {
         {
           text: 'Cancel',
           role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-          }
+          cssClass: 'secondary'
         }, {
           text: 'Okay',
           handler: () => {
+            this.md.deleteTask(task.id);
           }
         }
       ]
