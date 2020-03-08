@@ -49,7 +49,7 @@ export class HomePage implements OnInit {
   }
 
   gotoEditTask(id: number | string) {
-    this.router.navigate(['/todos/' + id]);
+    this.router.navigate([`/todos/${id}/edit`]);
   }
 
   completeFilter(complete?: boolean) {

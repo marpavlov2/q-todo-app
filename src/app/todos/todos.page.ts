@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Task } from '../interfaces/task';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MasterDataService } from '../services/master-data.service';
 import { Location } from '@angular/common';
+import { Task } from '../interfaces/task';
 
 @Component({
   selector: 'app-todos',
@@ -12,12 +12,13 @@ import { Location } from '@angular/common';
   styleUrls: ['./todos.page.scss'],
 })
 export class TodosPage implements OnInit, OnDestroy {
-  todoForm: FormGroup;
-  todo: Task; 
+  isEditing: boolean;
+  completed: boolean = false;
+  taskForm: FormGroup;
   routeSub: Subscription;
 
   constructor(private formBuilder: FormBuilder, private location: Location, private route: ActivatedRoute, private md: MasterDataService) {
-    this.todoForm = this.formBuilder.group({
+    this.taskForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
       completed: [false]
@@ -26,14 +27,26 @@ export class TodosPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.routeSub = this.route.params.subscribe(params => {
-      console.log(params); //log the entire params object
-      console.log(params['id']); //log the value of id
+      this.isEditing = params['edit'];
+      let taskId = +params['id'];
+      let task = this.md.tasks.find(task => task.id === taskId);
+      if (task) {
+        this.getTask(task);
+      }
     });
   }
 
-  addTask(){
-    this.md.tasks.push(this.todoForm.value);
+  addTask() {
+    this.md.tasks.push(this.taskForm.value);
     this.location.back();
+  }
+
+  getTask(task: Task) {
+    this.taskForm.patchValue({
+      title: task.title,
+      description: task.description
+    });
+    this.completed = task.completed;
   }
 
   ngOnDestroy() {
