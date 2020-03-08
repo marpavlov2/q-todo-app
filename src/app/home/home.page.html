@@ -7,15 +7,35 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+  <ion-list>
+    <ion-radio-group value="none">
+      <ion-list-header class="ion-no-padding">
+        <ion-label>Complete/incomplete filter</ion-label>
+      </ion-list-header>
+      <ion-item class="ion-no-padding" (ionFocus)="completeFilter(true)">
+        <ion-label>True</ion-label>
+        <ion-radio color="secondary" value="true" slot="start"></ion-radio>
+      </ion-item>
+      <ion-item class="ion-no-padding" (ionFocus)="completeFilter(false)">
+        <ion-label>False</ion-label>
+        <ion-radio color="secondary" value="false" slot="start"></ion-radio>
+      </ion-item>
+      <ion-item class="ion-no-padding" (ionFocus)="completeFilter()">
+        <ion-label>None</ion-label>
+        <ion-radio color="secondary" value="none" slot="start"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
   <table>
     <tr>
       <th *ngFor="let column of displayedColumns">{{column}}</th>
     </tr>
-    <tr *ngFor="let todo of todos">
+    <tr *ngFor="let todo of todosCopy">
       <td>{{todo.title}}</td>
       <td>{{todo.description}}</td>
       <td class="ion-text-center">
-        <ion-checkbox [checked]="todo.completed"></ion-checkbox>
+        <ion-checkbox color="secondary" [checked]="todo.completed"></ion-checkbox>
       </td>
       <td>{{todo.created}}</td>
     </tr>
