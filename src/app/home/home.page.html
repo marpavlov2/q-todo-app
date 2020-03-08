@@ -6,7 +6,20 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="ion-padding">
+  <table>
+    <tr>
+      <th *ngFor="let column of displayedColumns">{{column}}</th>
+    </tr>
+    <tr *ngFor="let todo of todos">
+      <td>{{todo.title}}</td>
+      <td>{{todo.description}}</td>
+      <td class="ion-text-center">
+        <ion-checkbox [checked]="todo.completed"></ion-checkbox>
+      </td>
+      <td>{{todo.created}}</td>
+    </tr>
+  </table>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="gotoAddTodo()">
     <ion-fab-button color="secondary">
       <ion-icon name="add"></ion-icon>
