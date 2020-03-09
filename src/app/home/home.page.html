@@ -40,9 +40,7 @@
       </td>
       <td>{{task.title}}</td>
       <td>{{task.description}}</td>
-      <td class="ion-text-center">
-        <ion-checkbox color="secondary" [checked]="task.completed"></ion-checkbox>
-      </td>
+      <td>{{task.completed}}</td>
       <td>{{formatDate(task.created)}}</td>
       <td class="ion-text-center">
         <ion-button color="secondary" size="small" (click)="gotoEditTask(task.id)">

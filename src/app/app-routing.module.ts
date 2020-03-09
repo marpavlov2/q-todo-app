@@ -9,8 +9,8 @@ const routes: Routes = [
     loadChildren: () => import('./todos/todos.module').then(m => m.TodosPageModule)
   },
   {
-    path: 'todos/:id/:edit',
-    loadChildren: () => import('./todos/todos.module').then(m => m.TodosPageModule)
+    path: 'edit/:id',
+    loadChildren: () => import('./edit-task/edit-task.module').then(m => m.EditTaskPageModule)
   }
 ];
 

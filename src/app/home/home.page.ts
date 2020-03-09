@@ -60,7 +60,7 @@ export class HomePage implements OnInit {
   }
 
   gotoEditTask(id: number | string) {
-    this.router.navigate([`/todos/${id}/edit`]);
+    this.router.navigate([`/edit/${id}`]);
   }
 
   async completeFilter(complete?: boolean) {
