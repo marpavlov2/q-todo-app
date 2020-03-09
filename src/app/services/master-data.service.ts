@@ -12,7 +12,7 @@ export class MasterDataService {
 
   constructor(public toast: ToastService) { }
 
-  createTask(task: Task): void {
+  createTask(task: Task) {
     firebase.firestore().collection('tasks').add({
       'title': task.title,
       'description': task.description,
@@ -43,7 +43,7 @@ export class MasterDataService {
     });
   }
 
-  async editTask(task: Task): Promise<void> {
+  async editTask(task: Task) {
     firebase.firestore().collection('tasks').doc(task.id).update(task).then(() => {
       this.toast.presentToast('Task successfully updated!');
       for (let i = 0; i < this.filteredTasks.length; i++) {
@@ -57,7 +57,7 @@ export class MasterDataService {
     });
   }
 
-  async deleteTask(id: string): Promise<void> {
+  async deleteTask(id: string) {
     firebase.firestore().collection('tasks').doc(id).delete().then(() => {
       this.toast.presentToast('Task successfully deleted!');
       for (let i = 0; i < this.filteredTasks.length; i++) {

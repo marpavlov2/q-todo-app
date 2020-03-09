@@ -52,7 +52,12 @@ export class HomePage implements OnInit {
   }
 
   deleteTasks() {
-
+    for (let i = 0; i < this.md.filteredTasks.length; i++) {
+      const task = this.md.filteredTasks[i];
+      if (task.isSelected) {
+        this.deleteTask(task);
+      }
+    }    
   }
 
   gotoAddTask() {
