@@ -32,7 +32,7 @@
   <div style="overflow-x:auto;">
     <table class="ion-margin-top" *ngIf="md.filteredTasks">
       <tr>
-        <th *ngFor="let column of displayedColumns" sortable-column="title">{{column}}</th>
+        <th *ngFor="let column of displayedColumns">{{column}}</th>
       </tr>
       <tr *ngFor="let task of md.filteredTasks | searchTask:searchTerm; let i = index"
         [ngStyle]="{'background-color': task.isSelected ? '#f2f2f2' : '#ffffff'}">
