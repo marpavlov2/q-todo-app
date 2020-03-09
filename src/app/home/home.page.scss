@@ -2,7 +2,7 @@ table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   table-layout: fixed;
-  min-width: 76.9rem;
+  min-width: 54rem;
 
   td,
   th {
@@ -32,6 +32,12 @@ table {
     padding: 0.6rem 1.2rem;
     text-decoration: none;
   }
+}
+
+.grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media screen and (min-width: 768px) {

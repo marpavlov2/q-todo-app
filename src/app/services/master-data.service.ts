@@ -71,34 +71,11 @@ export class MasterDataService {
     });
   }
 
-  async getTasks(): Promise<Task[]> {
-    let tasksCollection = firebase.firestore().collection('tasks')
-      .limit(3).get();
-    return tasksCollection.then((querySnapshot) => {
-      return querySnapshot.docs.map((doc) => {
-        let data = doc.data() as Task;
-        data.id = doc.id;
-        data.created = doc.data().created.toDate();
-        return data;
-      });
-    });
-  }
-
-  async nextTasks(): Promise<Task[]> {
-    let tasksCollection = firebase.firestore().collection('tasks').orderBy("title").startAfter('title')
-      .limit(3).get();
-    return tasksCollection.then((querySnapshot) => {
-      return querySnapshot.docs.map((doc) => {
-        let data = doc.data() as Task;
-        data.id = doc.id;
-        data.created = doc.data().created.toDate();
-        return data;
-      });
-    });
-  }
-
-  async prevTasks(): Promise<Task[]> {
-    let tasksCollection = firebase.firestore().collection('tasks').orderBy("title").endBefore('title').get();
+  async getTasks(column: string = 'title', order: string = 'asc'): Promise<Task[]> {
+    //orderBy won't accept order variable
+    let tasksCollection = order === 'asc' ?
+      firebase.firestore().collection('tasks').orderBy(column.toLowerCase(), 'asc').get() :
+      firebase.firestore().collection('tasks').orderBy(column.toLowerCase(), 'desc').get();
     return tasksCollection.then((querySnapshot) => {
       return querySnapshot.docs.map((doc) => {
         let data = doc.data() as Task;
