@@ -30,6 +30,42 @@ export class HomePage implements OnInit {
     this.completeFilter();
   }
 
+  gotoAddTask() {
+    this.router.navigate(['/todos']);
+  }
+
+  gotoEditTask(id: number | string) {
+    this.router.navigate([`/edit/${id}`]);
+  }
+
+  async completeFilter(complete?: boolean) {
+    if (complete === true) {
+      this.md.filteredTasks = this.md.tasks.filter(todo => todo.completed == true);
+    } else if (complete === false) {
+      this.md.filteredTasks = this.md.tasks.filter(todo => todo.completed == false);
+    } else {
+      this.md.filteredTasks = this.md.tasks;
+
+    };
+  }
+
+  async nextPage() {
+    this.md.filteredTasks = await this.md.nextTasks();
+  }
+
+  async prevPage() {
+    this.md.filteredTasks = await this.md.prevTasks();
+  }
+
+  selectItem(index: number, task: Task) {
+    task.isSelected = task.isSelected ? false : true;
+    this.md.filteredTasks[index] = task;
+  }
+
+  formatDate(date: Date): string {
+    return moment(date).format('DD.MM.YYYY, hh:mm:ss')
+  }
+
   async deleteTask(task: Task) {
     const alert = await this.alertController.create({
       header: 'Delete task',
@@ -57,39 +93,6 @@ export class HomePage implements OnInit {
       if (task.isSelected) {
         this.deleteTask(task);
       }
-    }    
+    }
   }
-
-  gotoAddTask() {
-    this.router.navigate(['/todos']);
-  }
-
-  gotoEditTask(id: number | string) {
-    this.router.navigate([`/edit/${id}`]);
-  }
-
-  async completeFilter(complete?: boolean) {
-    if (complete === true) {
-      this.md.filteredTasks = this.md.tasks.filter(todo => todo.completed == true);
-    } else if (complete === false) {
-      this.md.filteredTasks = this.md.tasks.filter(todo => todo.completed == false);
-    } else {
-      this.md.filteredTasks = this.md.tasks;
-      
-    };
-  }
-
-  selectItem(index: number, task: Task) {
-    task.isSelected = task.isSelected ? false : true;
-    this.md.filteredTasks[index] = task;
-  }
-
-  formatDate(date: Date): string {
-    return moment(date).format('DD.MM.YYYY, hh:mm:ss')
-  }
-
-  filterCloseToActive(pages: Array<number>) {
-    return pages.filter(page => { return (page > this.activePage - 2) && (page < this.activePage + 2) });
-  }
-
 }

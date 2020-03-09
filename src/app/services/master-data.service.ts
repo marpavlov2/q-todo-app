@@ -72,7 +72,33 @@ export class MasterDataService {
   }
 
   async getTasks(): Promise<Task[]> {
-    let tasksCollection = firebase.firestore().collection('tasks').get();
+    let tasksCollection = firebase.firestore().collection('tasks')
+      .limit(3).get();
+    return tasksCollection.then((querySnapshot) => {
+      return querySnapshot.docs.map((doc) => {
+        let data = doc.data() as Task;
+        data.id = doc.id;
+        data.created = doc.data().created.toDate();
+        return data;
+      });
+    });
+  }
+
+  async nextTasks(): Promise<Task[]> {
+    let tasksCollection = firebase.firestore().collection('tasks').orderBy("title").startAfter('title')
+      .limit(3).get();
+    return tasksCollection.then((querySnapshot) => {
+      return querySnapshot.docs.map((doc) => {
+        let data = doc.data() as Task;
+        data.id = doc.id;
+        data.created = doc.data().created.toDate();
+        return data;
+      });
+    });
+  }
+
+  async prevTasks(): Promise<Task[]> {
+    let tasksCollection = firebase.firestore().collection('tasks').orderBy("title").endBefore('title').get();
     return tasksCollection.then((querySnapshot) => {
       return querySnapshot.docs.map((doc) => {
         let data = doc.data() as Task;
