@@ -75,6 +75,7 @@ export class HomePage implements OnInit {
       this.md.filteredTasks = this.md.tasks.filter(todo => todo.completed == false);
     } else {
       this.md.filteredTasks = this.md.tasks;
+      
     };
   }
 
@@ -85,6 +86,10 @@ export class HomePage implements OnInit {
 
   formatDate(date: Date): string {
     return moment(date).format('DD.MM.YYYY, hh:mm:ss')
+  }
+
+  filterCloseToActive(pages: Array<number>) {
+    return pages.filter(page => { return (page > this.activePage - 2) && (page < this.activePage + 2) });
   }
 
 }

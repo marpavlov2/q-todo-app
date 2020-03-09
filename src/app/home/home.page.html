@@ -29,8 +29,8 @@
     </ion-radio-group>
   </ion-list>
 
-  <div style="overflow-x:auto;">
-    <table class="ion-margin-top" *ngIf="md.filteredTasks">
+  <div style="overflow-x:auto;" *ngIf="md.filteredTasks">
+    <table class="ion-margin-top">
       <tr>
         <th *ngFor="let column of displayedColumns">{{column}}</th>
       </tr>
@@ -54,6 +54,16 @@
       </tr>
     </table>
   </div>
+  <div class="pagination ion-margin-top"> 
+      <a href="#">&laquo;</a>
+      <a href="#">1</a>
+      <a class="active" href="#">2</a>
+      <a href="#">3</a>
+      <a href="#">4</a>
+      <a href="#">5</a>
+      <a href="#">6</a>
+      <a href="#">&raquo;</a>
+    </div>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="gotoAddTask()">
     <ion-fab-button color="secondary">
