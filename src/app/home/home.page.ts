@@ -13,7 +13,7 @@ import * as moment from 'moment';
 })
 export class HomePage implements OnInit {
   searchTerm: string | undefined;
-  displayedColumns: string[] = ['', 'Title', 'Description', 'Completed', 'Created'];
+  displayedColumns: string[] = ['Title', 'Description', 'Completed', 'Created'];
   bool: boolean = false;
 
   get hasSelection() {
@@ -39,12 +39,6 @@ export class HomePage implements OnInit {
     this.router.navigate([`/edit/${id}`]);
   }
 
-  async getOrderedTasks(column) {
-    this.bool = !this.bool;
-    let order = this.bool ? 'desc' : 'asc';
-    this.md.filteredTasks = await this.md.getTasks(column, order);
-  }
-
   async completeFilter(complete?: boolean) {
     if (complete === true) {
       this.md.filteredTasks = this.md.tasks.filter(todo => todo.completed == true);
@@ -61,6 +55,11 @@ export class HomePage implements OnInit {
 
   async prevPage() {
     //this.md.filteredTasks = await this.md.prevTasks();
+  }
+
+  async sortTaskList(event: CustomEvent) {
+    let column = event.detail.value;
+    this.md.filteredTasks = await this.md.getTasks(column);
   }
 
   selectItem(index: number, task: Task) {

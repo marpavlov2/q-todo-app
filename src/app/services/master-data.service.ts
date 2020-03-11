@@ -71,11 +71,8 @@ export class MasterDataService {
     });
   }
 
-  async getTasks(column: string = 'title', order: string = 'asc'): Promise<Task[]> {
-    //orderBy won't accept order variable
-    let tasksCollection = order === 'asc' ?
-      firebase.firestore().collection('tasks').orderBy(column.toLowerCase(), 'asc').get() :
-      firebase.firestore().collection('tasks').orderBy(column.toLowerCase(), 'desc').get();
+  async getTasks(column: string = 'title'): Promise<Task[]> {
+    let tasksCollection = firebase.firestore().collection('tasks').orderBy(column.toLowerCase(), 'asc').get();
     return tasksCollection.then((querySnapshot) => {
       return querySnapshot.docs.map((doc) => {
         let data = doc.data() as Task;
