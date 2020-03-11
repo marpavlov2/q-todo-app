@@ -22,8 +22,8 @@ export class AddTaskPage {
     });
   }
 
-  addTask() {
-    this.md.addTask(this.taskForm.value);
+  async addTask() {
+    await this.md.addTask(this.taskForm.value);
     this.location.back();
   }
 

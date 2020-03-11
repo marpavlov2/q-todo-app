@@ -14,7 +14,7 @@ export class MasterDataService {
 
   constructor(public toast: ToastService) { }
 
-  addTask(task: Task) {
+  async addTask(task: Task) {
     TASKS_ENDPOINT.add({
       'title': task.title,
       'description': task.description,
