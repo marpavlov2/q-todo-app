@@ -36,7 +36,7 @@
           <ion-avatar slot="start">
             <ion-checkbox color="secondary" (click)="selectItem(i, task)"></ion-checkbox>
           </ion-avatar>
-          <ion-label>
+          <ion-label (click)="presentModal(task)">
             <h2 class="elipsis"><b>{{task.title}}</b></h2>
             <p>{{task.created | date:'medium' }}</p>
             <h3 class="elipsis">{{task.description}}</h3>

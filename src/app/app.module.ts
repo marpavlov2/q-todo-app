@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import * as firebase from 'firebase';
 import { ToastService } from '../services/toast.service';
+import { TaskPage } from './task/task.page';
 
 firebase.initializeApp({
   apiKey: "AIzaSyBOv4hOeiB51_B9D7VcbNciBH_n9NdxS1c",
@@ -24,8 +25,8 @@ firebase.initializeApp({
 });
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, TaskPage],
+  entryComponents: [TaskPage],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [
     StatusBar,

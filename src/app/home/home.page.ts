@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Task } from '../../interfaces/task';
 import { MasterDataService } from '../../services/master-data.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
+import { TaskPage } from '../task/task.page';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +21,20 @@ export class HomePage implements OnInit {
   }
 
   constructor(private router: Router, private md: MasterDataService,
-    public alertController: AlertController) {
+    public alertController: AlertController, private modalController: ModalController) {
+  }
+
+  async presentModal(task: Task) {
+    //TODO: Create dialogs service when more modal windows are needed
+    const modal = await this.modalController.create({
+      component: TaskPage,
+      componentProps: {
+        'title': task.title,
+        'description': task.description,
+        'completed': task.completed
+      }
+    });
+    return await modal.present();
   }
 
   async ngOnInit() {
