@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Task } from '../interfaces/task';
+import { Task } from '../../interfaces/task';
 
 /**
  * Generated class for the searchRoutePipe pipe.

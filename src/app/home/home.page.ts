@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Task } from '../interfaces/task';
-import { MasterDataService } from '../services/master-data.service';
+import { Task } from '../../interfaces/task';
+import { MasterDataService } from '../../services/master-data.service';
 import { AlertController } from '@ionic/angular';
 
 @Component({

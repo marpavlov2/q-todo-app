@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
-import { SearchTaskPipe } from '../pipes/search-task-filter.pipe';
+import { SearchTaskPipe } from '../../pipes/search-task-filter.pipe';
 
 @NgModule({
   imports: [

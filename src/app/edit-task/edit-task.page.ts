@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { MasterDataService } from '../services/master-data.service';
-import { Task } from '../interfaces/task';
+import { MasterDataService } from '../../services/master-data.service';
+import { Task } from '../../interfaces/task';
 import { AlertController } from '@ionic/angular';
 import { Location } from '@angular/common';
 

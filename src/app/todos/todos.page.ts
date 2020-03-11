@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { MasterDataService } from '../services/master-data.service';
+import { MasterDataService } from '../../services/master-data.service';
 import { Location } from '@angular/common';
 
 @Component({
