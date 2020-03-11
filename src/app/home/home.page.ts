@@ -4,8 +4,6 @@ import { Task } from '../interfaces/task';
 import { MasterDataService } from '../services/master-data.service';
 import { AlertController } from '@ionic/angular';
 
-import * as moment from 'moment';
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -49,14 +47,6 @@ export class HomePage implements OnInit {
     };
   }
 
-  async nextPage() {
-    //this.md.filteredTasks = await this.md.nextTasks();
-  }
-
-  async prevPage() {
-    //this.md.filteredTasks = await this.md.prevTasks();
-  }
-
   async sortTaskList(event: CustomEvent) {
     let column = event.detail.value;
     this.md.filteredTasks = await this.md.getTasks(column);
@@ -65,10 +55,6 @@ export class HomePage implements OnInit {
   selectItem(index: number, task: Task) {
     task.isSelected = task.isSelected ? false : true;
     this.md.filteredTasks[index] = task;
-  }
-
-  formatDate(date: Date): string {
-    return moment(date).format('DD.MM.YYYY, hh:mm:ss')
   }
 
   async deleteTask(task: Task) {

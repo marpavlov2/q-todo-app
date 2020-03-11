@@ -51,9 +51,9 @@
             <ion-checkbox color="secondary" (click)="selectItem(i, task)"></ion-checkbox>
           </ion-avatar>
           <ion-label>
-            <h2><b>{{task.title}}</b></h2>
-            <p>{{formatDate(task.created)}}</p>
-            <h3>{{task.description}}</h3>
+            <h2 class="elipsis"><b>{{task.title}}</b></h2>
+            <p>{{task.created | date }}</p>
+            <h3 class="elipsis">{{task.description}}</h3>
             <p>Completed: {{task.completed ? 'Yes' : 'No'}}</p>
           </ion-label>
         </ion-item>

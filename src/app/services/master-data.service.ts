@@ -12,7 +12,6 @@ export class MasterDataService {
   public tasks: Task[] = [];
   public filteredTasks: Task[] | undefined;
 
-
   constructor(public toast: ToastService) { }
 
   createTask(task: Task) {
