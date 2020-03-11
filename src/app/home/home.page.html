@@ -38,7 +38,7 @@
           </ion-avatar>
           <ion-label>
             <h2 class="elipsis"><b>{{task.title}}</b></h2>
-            <p>{{task.created | date }}</p>
+            <p>{{task.created | date:'medium' }}</p>
             <h3 class="elipsis">{{task.description}}</h3>
             <p>Completed: {{task.completed ? 'Yes' : 'No'}}</p>
           </ion-label>
