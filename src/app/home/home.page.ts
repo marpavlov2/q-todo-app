@@ -82,6 +82,7 @@ export class HomePage implements OnInit {
 
   async deleteTasks() {
     //TODO: Create dialogs service
+    //Firebase does not support multiple deletion
     const alert = await this.alertController.create({
       header: 'Delete task',
       message: `Are you sure you want to delete multiple tasks?`,
