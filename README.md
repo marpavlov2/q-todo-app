@@ -23,7 +23,7 @@ $ npm install
 To start the development server, run
 
 ```
-$ npm start
+$ ionic serve
 ```
 
 A browser window will open to http://localhost:8100/ionic-lab. In Ionic lab you may select different platforms to emulate. While developing, make sure you test styles on both iOS and Android platforms.
@@ -106,4 +106,4 @@ Todo App has several "modes" available which define the update channel it looks 
 
 | Mode        | Deploy Channel | Server                        |
 | ----------- | -------------- | ----------------------------- |
-| develop  | develop     | http://localhost:8100/home       |
+| develop  | develop     | http://localhost:8100       |
