@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Task } from '../interfaces/task';
 import * as firebase from 'firebase';
 import { ToastService } from './toast.service';
-import { LoadingController } from '@ionic/angular';
 import { SpinnerService } from './spinner.service';
 
 const TASKS_ENDPOINT = firebase.firestore().collection('tasks');
@@ -14,7 +13,7 @@ export class MasterDataService {
   public tasks: Task[] = [];
   public filteredTasks: Task[] | undefined;
 
-  constructor(private toast: ToastService, private spinner: SpinnerService) { }  
+  constructor(public toast: ToastService, public spinner: SpinnerService) { }  
 
   async addTask(task: Task) {
     this.spinner.presentSpinner();
@@ -74,7 +73,6 @@ export class MasterDataService {
   }
 
   async deleteTask(id: string) {
-    this.spinner.presentSpinner();
     TASKS_ENDPOINT.doc(id).delete().then(() => {
       this.toast.presentToast('Task successfully deleted!');
       for (let i = 0; i < this.filteredTasks.length; i++) {

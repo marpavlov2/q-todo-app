@@ -24,19 +24,6 @@ export class HomePage implements OnInit {
     public alertController: AlertController, private modalController: ModalController) {
   }
 
-  async presentModal(task: Task) {
-    //TODO: Create dialogs service when more modal windows are needed
-    const modal = await this.modalController.create({
-      component: TaskPage,
-      componentProps: {
-        'title': task.title,
-        'description': task.description,
-        'completed': task.completed
-      }
-    });
-    return await modal.present();
-  }
-
   async ngOnInit() {
     this.md.tasks = await this.md.getTasks();
     this.md.filteredTasks = [...this.md.tasks];
@@ -84,6 +71,7 @@ export class HomePage implements OnInit {
         }, {
           text: 'Okay',
           handler: () => {
+            this.md.spinner.presentSpinner();
             this.md.deleteTask(task.id);
           }
         }
@@ -94,8 +82,7 @@ export class HomePage implements OnInit {
   }
 
   async deleteTasks() {
-    //TODO: Create dialogs service
-    //Firebase does not support multiple deletion
+    //TODO: Create dialogs service when more modal windows are needed
     const alert = await this.alertController.create({
       header: 'Delete task',
       message: `Are you sure you want to delete multiple tasks?`,
@@ -107,6 +94,10 @@ export class HomePage implements OnInit {
         }, {
           text: 'Okay',
           handler: async () => {
+            //Should be used only in md.service
+            //Used here to prevent multiple showing on delete tasks (for loop)
+            //Firebase does not support multiple deletion
+            this.md.spinner.presentSpinner();
             for (let i = 0; i < this.md.filteredTasks.length; i++) {
               const task = this.md.filteredTasks[i];
               if (task.isSelected) {
@@ -119,5 +110,17 @@ export class HomePage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  async presentModal(task: Task) {
+    const modal = await this.modalController.create({
+      component: TaskPage,
+      componentProps: {
+        'title': task.title,
+        'description': task.description,
+        'completed': task.completed
+      }
+    });
+    return await modal.present();
   }
 }
