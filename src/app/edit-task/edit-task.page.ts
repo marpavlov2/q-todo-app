@@ -49,6 +49,7 @@ export class EditTaskPage implements OnInit {
   editTask() {
     let task = this.taskForm.value;
     task.id = this.task.id;
+    task.creted = this.task.created;
     this.md.editTask(task);
     this.location.back();
   }
