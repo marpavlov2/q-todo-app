@@ -26,29 +26,29 @@ export class HomePage implements OnInit {
 
   async ngOnInit() {
     this.md.tasks = await this.md.getTasks();
-    this.md.filteredTasks = this.md.tasks;
+    this.md.filteredTasks = [...this.md.tasks];
   }
 
   gotoAddTask() {
-    this.router.navigate(['/tasks']);
+    this.router.navigate(['/task']);
   }
 
   gotoEditTask(id: number | string) {
     this.router.navigate([`/edit/${id}`]);
   }
 
-  async filterTaskList(event: CustomEvent) {
+  async filterTasksByComplete(event: CustomEvent) {
     let filter = event.detail.value;
     if (filter === 'true') {
       this.md.filteredTasks = this.md.tasks.filter(todo => todo.completed == true);
     } else if (filter === 'false') {
       this.md.filteredTasks = this.md.tasks.filter(todo => todo.completed == false);
     } else {
-      this.md.filteredTasks = this.md.tasks;
+      this.md.filteredTasks = [...this.md.tasks];
     }
   }
 
-  async sortTaskList(event: CustomEvent) {
+  async sortTasksByColumn(event: CustomEvent) {
     let column = event.detail.value;
     this.md.filteredTasks = await this.md.getTasks(column);
   }
@@ -92,11 +92,11 @@ export class HomePage implements OnInit {
           cssClass: 'secondary'
         }, {
           text: 'Okay',
-          handler: () => {
+          handler: async () => {
             for (let i = 0; i < this.md.filteredTasks.length; i++) {
               const task = this.md.filteredTasks[i];
               if (task.isSelected) {
-                this.md.deleteTask(task.id);
+                await this.md.deleteTask(task.id);
               }
             }
           }

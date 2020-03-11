@@ -7,26 +7,26 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+  <ion-searchbar showCancelButton="focus" [(ngModel)]="searchTerm"></ion-searchbar>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Sort by</ion-label>
+      <ion-select okText="Okay" cancelText="Dismiss" (ionChange)="sortTasksByColumn($event)">
+        <ion-select-option *ngFor="let column of displayedColumns" [value]="column">{{column}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Filter by</ion-label>
+      <ion-select okText="Okay" cancelText="Dismiss" (ionChange)="filterTasksByComplete($event)">
+        <ion-select-option value="true">True</ion-select-option>
+        <ion-select-option value="false">False</ion-select-option>
+        <ion-select-option value="">None</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
   <div *ngIf="md.filteredTasks && md.filteredTasks.length">
-    <ion-searchbar showCancelButton="focus" [(ngModel)]="searchTerm"></ion-searchbar>
-
-    <ion-list>
-      <ion-item>
-        <ion-label>Filter by</ion-label>
-        <ion-select value="brown" okText="Okay" cancelText="Dismiss" (ionChange)="filterTaskList($event)">
-          <ion-select-option value="true">True</ion-select-option>
-          <ion-select-option value="false">False</ion-select-option>
-          <ion-select-option value="">None</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label>Sort by</ion-label>
-        <ion-select okText="Okay" cancelText="Dismiss" (ionChange)="sortTaskList($event)">
-          <ion-select-option *ngFor="let column of displayedColumns" [value]="column">{{column}}</ion-select-option>
-        </ion-select>
-      </ion-item>
-    </ion-list>
-
     <ion-list class="ion-margin-top">
       <ion-list-header>
         Tasks

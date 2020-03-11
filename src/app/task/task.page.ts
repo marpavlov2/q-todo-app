@@ -23,7 +23,7 @@ export class TaskPage {
   }
 
   addTask() {
-    this.md.createTask(this.taskForm.value);
+    this.md.addTask(this.taskForm.value);
     this.location.back();
   }
 

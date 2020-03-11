@@ -14,19 +14,20 @@ export class MasterDataService {
 
   constructor(public toast: ToastService) { }
 
-  createTask(task: Task) {
+  addTask(task: Task) {
     TASKS_ENDPOINT.add({
       'title': task.title,
       'description': task.description,
       'completed': task.completed,
       'created': new Date()
-    }).then((querySnapshot) => {
-      querySnapshot.onSnapshot(doc => {
+    }).then((docRef) => {
+      docRef.get().then(doc => {
         if (doc.exists) {
           let data = doc.data() as Task;
           data.id = doc.id;
           data.created = doc.data().created.toDate();
-          this.filteredTasks.push(data);
+          this.tasks.push(data);
+          this.filteredTasks = [...this.tasks];
         }
       });
       this.toast.presentToast('Task successfully added.');
@@ -52,10 +53,12 @@ export class MasterDataService {
         let filteredTask = this.filteredTasks[i];
         if (task.id === filteredTask.id) {
           this.filteredTasks[i] = task;
+          let itemIndex = this.tasks.findIndex(task => task.id == filteredTask.id);
+          this.tasks[itemIndex] = task;
         }
       }
     }).catch(() => {
-      this.toast.presentToast('Error removing task.');
+      this.toast.presentToast('Error editing task.');
     });
   }
 
@@ -66,6 +69,7 @@ export class MasterDataService {
         const filteredTask = this.filteredTasks[i];
         if (id === filteredTask.id) {
           this.filteredTasks.splice(i, 1);
+          this.tasks = this.tasks.filter(task => task.id != id);
         }
       }
     }).catch(() => {
