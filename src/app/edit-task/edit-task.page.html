@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Edit Task
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="taskForm">
+    <ion-item class="ion-no-padding">
+      <ion-label position="floating" color="primary">Title</ion-label>
+      <ion-input required type="text" formControlName="title"></ion-input>
+    </ion-item>
+
+    <ion-item class="ion-no-padding">
+      <ion-label position="floating">Description</ion-label>
+      <ion-textarea required formControlName="description"></ion-textarea>
+    </ion-item>
+
+    <ion-item class="ion-no-padding">
+      <ion-checkbox [(ngModel)]="completed" formControlName="completed" color="secondary" slot="end"></ion-checkbox>
+      <ion-label>Completed</ion-label>
+    </ion-item>
+
+    <ion-button class="ion-margin-top" color="light" expand="full" type="submit" [disabled]="!taskForm.valid" (click)="editTask()">
+      Save</ion-button>
+    <ion-button class="ion-margin-top" color="danger" expand="full" type="submit" (click)="deleteTask(task)">
+      Delete</ion-button>
+  </form>
+</ion-content>
