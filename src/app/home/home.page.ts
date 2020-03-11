@@ -30,7 +30,7 @@ export class HomePage implements OnInit {
   }
 
   gotoAddTask() {
-    this.router.navigate(['/todos']);
+    this.router.navigate(['/tasks']);
   }
 
   gotoEditTask(id: number | string) {

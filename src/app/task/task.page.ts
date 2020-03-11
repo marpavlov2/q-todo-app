@@ -5,11 +5,11 @@ import { MasterDataService } from '../../services/master-data.service';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-todos',
-  templateUrl: './todos.page.html',
-  styleUrls: ['./todos.page.scss'],
+  selector: 'app-task',
+  templateUrl: './task.page.html',
+  styleUrls: ['./task.page.scss'],
 })
-export class TodosPage {
+export class TaskPage {
   completed: boolean = false;
   taskForm: FormGroup;
   routeSub: Subscription;

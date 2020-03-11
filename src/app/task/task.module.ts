@@ -5,18 +5,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TodosPageRoutingModule } from './todos-routing.module';
+import { TaskPageRoutingModule } from './task-routing.module';
 
-import { TodosPage } from './todos.page';
+import { TaskPage } from './task.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TodosPageRoutingModule,
+    TaskPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [TodosPage]
+  declarations: [TaskPage]
 })
-export class TodosPageModule {}
+export class TaskPageModule {}
