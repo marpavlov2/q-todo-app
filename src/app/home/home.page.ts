@@ -26,7 +26,7 @@ export class HomePage implements OnInit {
 
   async ngOnInit() {
     this.md.tasks = await this.md.getTasks();
-    this.completeFilter();
+    this.md.filteredTasks = this.md.tasks;
   }
 
   gotoAddTask() {
@@ -37,14 +37,15 @@ export class HomePage implements OnInit {
     this.router.navigate([`/edit/${id}`]);
   }
 
-  async completeFilter(complete?: boolean) {
-    if (complete === true) {
+  async filterTaskList(event: CustomEvent) {
+    let filter = event.detail.value;
+    if (filter === 'true') {
       this.md.filteredTasks = this.md.tasks.filter(todo => todo.completed == true);
-    } else if (complete === false) {
+    } else if (filter === 'false') {
       this.md.filteredTasks = this.md.tasks.filter(todo => todo.completed == false);
     } else {
       this.md.filteredTasks = this.md.tasks;
-    };
+    }
   }
 
   async sortTaskList(event: CustomEvent) {

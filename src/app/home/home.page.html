@@ -11,34 +11,20 @@
     <ion-searchbar showCancelButton="focus" [(ngModel)]="searchTerm"></ion-searchbar>
 
     <ion-list>
-      <ion-list-header>
-        Complete/incomplete filter
-      </ion-list-header>
-      <ion-radio-group value="none">
-        <ion-item class="ion-no-padding" (ionFocus)="completeFilter(true)">
-          <ion-label>True</ion-label>
-          <ion-radio color="secondary" value="true" slot="start"></ion-radio>
-        </ion-item>
-        <ion-item class="ion-no-padding" (ionFocus)="completeFilter(false)">
-          <ion-label>False</ion-label>
-          <ion-radio color="secondary" value="false" slot="start"></ion-radio>
-        </ion-item>
-        <ion-item class="ion-no-padding" (ionFocus)="completeFilter()">
-          <ion-label>None</ion-label>
-          <ion-radio color="secondary" value="none" slot="start"></ion-radio>
-        </ion-item>
-      </ion-radio-group>
-    </ion-list>
-
-    <ion-list>
-
+      <ion-item>
+        <ion-label>Filter by</ion-label>
+        <ion-select value="brown" okText="Okay" cancelText="Dismiss" (ionChange)="filterTaskList($event)">
+          <ion-select-option value="true">True</ion-select-option>
+          <ion-select-option value="false">False</ion-select-option>
+          <ion-select-option value="">None</ion-select-option>
+        </ion-select>
+      </ion-item>
       <ion-item>
         <ion-label>Sort by</ion-label>
-        <ion-select value="brown" okText="Okay" cancelText="Dismiss" (ionChange)="sortTaskList($event)">
+        <ion-select okText="Okay" cancelText="Dismiss" (ionChange)="sortTaskList($event)">
           <ion-select-option *ngFor="let column of displayedColumns" [value]="column">{{column}}</ion-select-option>
         </ion-select>
       </ion-item>
-
     </ion-list>
 
     <ion-list class="ion-margin-top">
