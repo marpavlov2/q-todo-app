@@ -72,6 +72,7 @@ export class HomePage implements OnInit {
   }
 
   async deleteTask(task: Task) {
+    //TODO: Create dialogs service
     const alert = await this.alertController.create({
       header: 'Delete task',
       message: `Are you sure you want to delete ${task.title}?`,
@@ -92,12 +93,30 @@ export class HomePage implements OnInit {
     await alert.present();
   }
 
-  deleteTasks() {
-    for (let i = 0; i < this.md.filteredTasks.length; i++) {
-      const task = this.md.filteredTasks[i];
-      if (task.isSelected) {
-        this.deleteTask(task);
-      }
-    }
+  async deleteTasks() {
+    //TODO: Create dialogs service
+    const alert = await this.alertController.create({
+      header: 'Delete task',
+      message: `Are you sure you want to delete multiple tasks?`,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Okay',
+          handler: () => {
+            for (let i = 0; i < this.md.filteredTasks.length; i++) {
+              const task = this.md.filteredTasks[i];
+              if (task.isSelected) {
+                this.md.deleteTask(task.id);
+              }
+            }
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }
