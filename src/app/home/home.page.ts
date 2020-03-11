@@ -12,7 +12,6 @@ import { AlertController } from '@ionic/angular';
 export class HomePage implements OnInit {
   searchTerm: string | undefined;
   displayedColumns: string[] = ['Title', 'Description', 'Completed', 'Created'];
-  bool: boolean = false;
 
   get hasSelection() {
     if (this.md.filteredTasks) {
