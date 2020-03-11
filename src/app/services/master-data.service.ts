@@ -3,6 +3,8 @@ import { Task } from '../interfaces/task';
 import * as firebase from 'firebase';
 import { ToastService } from './toast.service';
 
+const TASKS_ENDPOINT = firebase.firestore().collection('tasks');
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,10 +12,11 @@ export class MasterDataService {
   public tasks: Task[] = [];
   public filteredTasks: Task[] | undefined;
 
+
   constructor(public toast: ToastService) { }
 
   createTask(task: Task) {
-    firebase.firestore().collection('tasks').add({
+    TASKS_ENDPOINT.add({
       'title': task.title,
       'description': task.description,
       'completed': task.completed,
@@ -34,7 +37,7 @@ export class MasterDataService {
   }
 
   async getTask(id: string): Promise<Task> {
-    return firebase.firestore().collection('tasks').doc(id).get().then(async doc => {
+    return TASKS_ENDPOINT.doc(id).get().then(async doc => {
       if (doc.exists) {
         let data = doc.data() as Task;
         data.id = doc.id;
@@ -44,7 +47,7 @@ export class MasterDataService {
   }
 
   async editTask(task: Task) {
-    firebase.firestore().collection('tasks').doc(task.id).update(task).then(() => {
+    TASKS_ENDPOINT.doc(task.id).update(task).then(() => {
       this.toast.presentToast('Task successfully updated!');
       for (let i = 0; i < this.filteredTasks.length; i++) {
         let filteredTask = this.filteredTasks[i];
@@ -58,7 +61,7 @@ export class MasterDataService {
   }
 
   async deleteTask(id: string) {
-    firebase.firestore().collection('tasks').doc(id).delete().then(() => {
+    TASKS_ENDPOINT.doc(id).delete().then(() => {
       this.toast.presentToast('Task successfully deleted!');
       for (let i = 0; i < this.filteredTasks.length; i++) {
         const filteredTask = this.filteredTasks[i];
@@ -72,7 +75,7 @@ export class MasterDataService {
   }
 
   async getTasks(column: string = 'title'): Promise<Task[]> {
-    let tasksCollection = firebase.firestore().collection('tasks').orderBy(column.toLowerCase(), 'asc').get();
+    let tasksCollection = TASKS_ENDPOINT.orderBy(column.toLowerCase(), 'asc').get();
     return tasksCollection.then((querySnapshot) => {
       return querySnapshot.docs.map((doc) => {
         let data = doc.data() as Task;
