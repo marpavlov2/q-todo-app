@@ -78,6 +78,7 @@ export class MasterDataService {
   }
 
   async getTasks(column: string = 'title'): Promise<Task[]> {
+    //TODO: Add ability to order by 'asc' or 'desc'
     let tasksCollection = TASKS_ENDPOINT.orderBy(column.toLowerCase(), 'asc').get();
     return tasksCollection.then((querySnapshot) => {
       return querySnapshot.docs.map((doc) => {
