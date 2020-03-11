@@ -5,18 +5,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { TaskPageRoutingModule } from './task-routing.module';
+import { AddTaskPageRoutingModule } from './add-task-routing.module';
 
-import { TaskPage } from './task.page';
+import { AddTaskPage } from './add-task.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TaskPageRoutingModule,
+    AddTaskPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [TaskPage]
+  declarations: [AddTaskPage]
 })
-export class TaskPageModule {}
+export class AddTaskPageModule {}

@@ -6,10 +6,10 @@ import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-task',
-  templateUrl: './task.page.html',
-  styleUrls: ['./task.page.scss'],
+  templateUrl: './add-task.page.html',
+  styleUrls: ['./add-task.page.scss'],
 })
-export class TaskPage {
+export class AddTaskPage {
   completed: boolean = false;
   taskForm: FormGroup;
   routeSub: Subscription;

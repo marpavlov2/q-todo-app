@@ -6,7 +6,7 @@ const routes: Routes = [
   { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomePageModule) },
   {
     path: 'task',
-    loadChildren: () => import('./task/task.module').then(m => m.TaskPageModule)
+    loadChildren: () => import('./add-task/add-task.module').then(m => m.AddTaskPageModule)
   },
   {
     path: 'edit/:id',
